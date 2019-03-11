@@ -45,4 +45,11 @@ public class MuzixController {
         Muzix muzixById = muzixService.getTrackById(id);
         return new ResponseEntity<Muzix>(muzixById,HttpStatus.OK);
     }
+
+    @GetMapping("/muzixse/{id}")
+
+    public void removeTrack(@PathVariable int id){
+         muzixService.removeById(id);
+
+    }
 }

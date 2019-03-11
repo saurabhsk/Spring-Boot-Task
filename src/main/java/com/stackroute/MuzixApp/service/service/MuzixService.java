@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MuzixService {
@@ -18,6 +19,7 @@ public class MuzixService {
     public MuzixService(MuzixRepo muzixRepo) {
         this.muzixRepo = muzixRepo;
     }
+
     public Muzix saveMuzix(Muzix muzix){
         Muzix savedtrack = muzixRepo.save(muzix);
         return savedtrack;
@@ -35,7 +37,11 @@ public class MuzixService {
 
     }
     public Muzix getTrackById(int id){
-        return muzixRepo.getOne(id);
+        Optional<Muzix> muzix = muzixRepo.findById(id);
+        return muzix.get();
 
+    }
+    public void removeById(int id) {
+         muzixRepo.deleteById(id);
     }
 }
