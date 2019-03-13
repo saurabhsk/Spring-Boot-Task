@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
 @ControllerAdvice
-public class ExceptionController {
+public class GlobalControllerException {   //To handle Exceptions globally
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handler(Exception ex) {

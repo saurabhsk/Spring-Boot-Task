@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface MuzixRepo extends JpaRepository<Muzix, Integer> {
 
-    List<Muzix> findByTrackName(String trackName);
+    List<Muzix> findByTrackName(String trackName);  // creating custom method to find Data by trackName
 }

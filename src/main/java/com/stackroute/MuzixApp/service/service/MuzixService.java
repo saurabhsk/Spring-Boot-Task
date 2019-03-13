@@ -1,64 +1,25 @@
 package com.stackroute.MuzixApp.service.service;
 
-
 import com.stackroute.MuzixApp.service.domain.Muzix;
 import com.stackroute.MuzixApp.service.exception.MuzixAlreadyExistException;
 import com.stackroute.MuzixApp.service.exception.MuzixNotFoundException;
-import com.stackroute.MuzixApp.service.repository.MuzixRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.stackroute.MuzixApp.service.exception.MuzixTrackNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class MuzixService {
+//MuzixService Interface having methods to be implemented by MuzixServiceImpl class
 
-    private MuzixRepo muzixRepo;
+public interface MuzixService {
 
+    public Muzix saveMuzix(Muzix muzix) throws MuzixAlreadyExistException;
 
-    @Autowired
-    public MuzixService(MuzixRepo muzixRepo) {
-        this.muzixRepo = muzixRepo;
-    }
+    public Muzix updateTrack(Muzix muzix) throws MuzixTrackNotFoundException;
 
-    public Muzix saveMuzix(Muzix muzix) throws MuzixAlreadyExistException {
-        if (muzixRepo.existsById(muzix.getTrackId())) {
+    public List<Muzix> getAllTracks();
 
-            throw new MuzixAlreadyExistException("Track Already present");
-        }
-        Muzix savedtrack = muzixRepo.save(muzix);
+    public List<Muzix> getTracksByName(String trackName)throws MuzixNotFoundException;
 
-        return savedtrack;
+    public Muzix getTrackById(int id);
 
-    }
-
-    public Muzix updateTrack(Muzix muzix) {
-        Muzix updatetrack = muzixRepo.save(muzix);
-        return updatetrack;
-
-    }
-
-    public List<Muzix> getAllTracks() {
-        return muzixRepo.findAll();
-
-    }
-
-    public List<Muzix> getTracksByName(String trackName) throws MuzixNotFoundException {
-        if (muzixRepo.findByTrackName(trackName).isEmpty()) {
-            throw new MuzixNotFoundException("Track Not found ");
-        }
-        return muzixRepo.findByTrackName(trackName);
-
-    }
-
-    public Muzix getTrackById(int id) {
-        Optional<Muzix> muzix = muzixRepo.findById(id);
-        return muzix.get();
-
-    }
-
-    public void removeById(int id) {
-        muzixRepo.deleteById(id);
-    }
+    public void removeById(int id);
 }
