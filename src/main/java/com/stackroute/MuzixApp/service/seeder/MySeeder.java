@@ -11,7 +11,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MySeeder implements ApplicationListener<ContextRefreshedEvent>, CommandLineRunner {
+public class MySeeder implements ApplicationListener<ContextRefreshedEvent> {
 
 
     private MuzixServiceImpl muzixService;
@@ -30,26 +30,26 @@ public class MySeeder implements ApplicationListener<ContextRefreshedEvent>, Com
     //to store default data in database using ApplicationListener method
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        Muzix muzix = new Muzix(1, name1, comment1);
+        Muzix muzix = new Muzix(null, name1, comment1);
         try {
             muzixService.saveMuzix(muzix);
         } catch (MuzixAlreadyExistException e) {
             e.printStackTrace();
         }
     }
-
-    @Value("${trackName2}")
-    String name2;
-    @Value("${comment2}")
-    String comment2;
+//
+//    @Value("${trackName2}")
+//    String name2;
+//    @Value("${comment2}")
+//    String comment2;
 
 
     //to store default data in database using CommandLineRunner method
-    @Override
-    public void run(String... args) throws Exception {
-
-        Muzix muzix = new Muzix(0, name2, comment2);
-
-        muzixService.saveMuzix(muzix);
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//
+//        Muzix muzix = new Muzix("0", name2, comment2);
+//
+//        muzixService.saveMuzix(muzix);
+//    }
 }

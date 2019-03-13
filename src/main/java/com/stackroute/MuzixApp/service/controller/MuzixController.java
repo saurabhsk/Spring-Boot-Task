@@ -34,7 +34,7 @@ public class MuzixController {
     }
 
     @PutMapping("/muzix/{id}")  //To update data in database using id
-    public ResponseEntity<Muzix> updateTrack(@RequestBody Muzix muzix, @PathVariable int id) throws MuzixTrackNotFoundException {
+    public ResponseEntity<Muzix> updateTrack(@RequestBody Muzix muzix, @PathVariable String id) throws MuzixTrackNotFoundException {
         muzix.setTrackId(id);
         Muzix updatetrack = muzixServiceImpl.updateTrack(muzix);
         return new ResponseEntity<Muzix>(updatetrack, HttpStatus.OK);
@@ -59,14 +59,14 @@ public class MuzixController {
     }
 
     @GetMapping("/muzix/muzixs/{id}") //To get data from database using id
-    public ResponseEntity<Muzix> getMuzixById(@PathVariable int id) {
+    public ResponseEntity<Muzix> getMuzixById(@PathVariable String id) {
         Muzix muzixById = muzixServiceImpl.getTrackById(id);
         return new ResponseEntity<Muzix>(muzixById, HttpStatus.OK);
     }
 
     @DeleteMapping("/muzix/muzixse/{id}")  //To delete data using id
 
-    public String removeTrack(@PathVariable int id) {
+    public String removeTrack(@PathVariable String id) {
         muzixServiceImpl.removeById(id);
          return "Data Deleted Successfully!!";
     }

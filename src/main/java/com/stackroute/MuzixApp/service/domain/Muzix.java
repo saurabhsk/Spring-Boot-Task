@@ -8,13 +8,11 @@ package com.stackroute.MuzixApp.service.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
+@Document
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,8 +20,7 @@ import javax.persistence.Id;
 public class Muzix {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int trackId;         //instance variables
+    private String trackId;         //instance variables
     private String trackName;
     private String comments;
 }

@@ -15,7 +15,7 @@ import java.util.Optional;
 //class that implements the methods of MuzixService Interface
 
 @Service
-public class MuzixServiceImpl implements MuzixService {
+public class MuzixServiceImpl {
 
     private MuzixRepo muzixRepo;
 
@@ -28,10 +28,6 @@ public class MuzixServiceImpl implements MuzixService {
 
     //Method to return saveedtrack and handle exception
     public Muzix saveMuzix(Muzix muzix) throws MuzixAlreadyExistException {
-        if (muzixRepo.existsById(muzix.getTrackId())) {
-
-            throw new MuzixAlreadyExistException("Track Already present");
-        }
         Muzix savedtrack = muzixRepo.save(muzix);
 
         return savedtrack;
@@ -41,10 +37,6 @@ public class MuzixServiceImpl implements MuzixService {
     //Method to return updatedtrack
 
     public Muzix updateTrack(Muzix muzix) throws MuzixTrackNotFoundException {
-        if (!muzixRepo.existsById(muzix.getTrackId())) {
-
-            throw new MuzixTrackNotFoundException("Muzix Track Not Found");
-        }
         Muzix updatetrack = muzixRepo.save(muzix);
         return updatetrack;
 
@@ -68,8 +60,8 @@ public class MuzixServiceImpl implements MuzixService {
     }
 
 
-    //Method to return data using trackId
-    public Muzix getTrackById(int id) {
+//    Method to return data using trackId
+    public Muzix getTrackById(String id) {
         Optional<Muzix> muzix = muzixRepo.findById(id);
         return muzix.get();
 
@@ -77,7 +69,7 @@ public class MuzixServiceImpl implements MuzixService {
 
 
     //Method to delete data using id
-    public void removeById(int id) {
+    public void removeById(String id) {
         muzixRepo.deleteById(id);
     }
 }
